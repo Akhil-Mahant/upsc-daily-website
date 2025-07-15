@@ -3,325 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPSC Daily - Your Daily Current Affairs Edge</title>
-    <!-- Load Tailwind CSS -->
+    <title>UPSC Daily - Your Environment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Using Inter font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <style>
+        /* ===== DUAL-THEME SYSTEM (Himalayan Dawn + Royal Gold) ===== */
+        :root {
+            --bg-gradient: linear-gradient(to bottom, #e6f0ff, #fdf6ec);
+            --bg-color: #fdf6ec;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --accent-primary: #d9480f;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(229, 231, 235, 0.9);
+            --header-bg: rgba(255, 255, 255, 0.5);
+            --footer-bg: rgba(243, 244, 246, 0.7);
+            --input-bg: #ffffff;
+            --heading-accent-color: var(--text-primary);
+            --pain-color: #b91c1c;
+            --solution-color: #047857;
+        }
+
+        html.dark {
+            --bg-gradient: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E");
+            --bg-color: #000000;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --accent-primary: #F97316;
+            --card-bg: rgba(24, 24, 27, 0.5);
+            --card-border: rgba(249, 115, 22, 0.2);
+            --header-bg: rgba(0, 0, 0, 0.5);
+            --footer-bg: #0a0a0a;
+            --input-bg: #18181b;
+            --heading-accent-color: var(--accent-primary);
+            --pain-color: #f97316;
+            --solution-color: #2dd4bf;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-secondary);
         }
+
+        /* ARTWORK MANAGEMENT */
+        #background-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
+        .light-theme-art { display: block; }
+        html.dark .light-theme-art { display: none; }
+        #mountain-landscape { position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: 35%; will-change: transform; }
+        .mountain-layer { position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: 100%; background-repeat: no-repeat; background-position: bottom center; background-size: cover; will-change: transform; transition: transform 0.3s ease-out; }
+        #mountains-back { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23a2bba7' fill-opacity='0.5' d='M0,224L48,208C96,192,192,160,288,165.3C384,171,480,213,576,229.3C672,245,768,235,864,202.7C960,171,1056,117,1152,101.3C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); }
+        #mountains-mid { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%235a7d7c' fill-opacity='0.6' d='M0,256L48,250.7C96,245,192,235,288,202.7C384,171,480,117,576,117.3C672,117,768,171,864,181.3C960,192,1056,160,1152,138.7C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); }
+        #mountains-front { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23334155' fill-opacity='0.8' d='M0,288L48,272C96,256,192,224,288,218.7C384,213,480,235,576,256C672,277,768,299,864,288C960,277,1056,235,1152,218.7C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); }
+        .light-particle { position: absolute; width: 4px; height: 4px; background-color: rgba(217, 72, 15, 0.4); border-radius: 50%; animation: float 20s infinite linear; }
+        @keyframes float { 0% { transform: translate(0, 0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translate(-100px, -500px); opacity: 0; } }
+
+        /* GENERAL LAYOUT & COMPONENTS */
+        main, header, footer { position: relative; z-index: 1; }
+        header { background-color: var(--header-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Lora', serif; color: var(--text-primary); font-weight: 600; }
+        .section-padding { padding: 4rem 1.5rem; }
+        @media (min-width: 768px) { .section-padding { padding: 6rem 1.5rem; } }
         
-        /* -- Animated Gradient Background -- */
-        .animated-hero-bg {
-            background: #0d121c;
-            background: linear-gradient(-45deg, #1e3a8a, #0c111e, #1e293b, #3b82f6);
-            background-size: 400% 400%;
-            animation: gradient-animation 15s ease infinite;
-        }
+        /* Pain vs Solution Section */
+        .pain-solution-label { color: var(--text-secondary); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; }
+        .pain-heading { color: var(--pain-color); }
+        .solution-heading { color: var(--solution-color); }
+        .gold-divider { height: 1px; width: 50px; background-color: var(--accent-primary); border: 0; margin: 2rem auto; opacity: 0.5; }
+        html.light .gold-divider { background-color: #d1d5db; }
 
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Sticky Scroll Section */
+        #solutions-sticky-container { height: 800vh; }
+        #solutions-sticky-content { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        @media (min-width: 768px) { #solutions-sticky-content { flex-direction: row; } }
+        .solution-text-item { will-change: opacity, transform; }
+        .device-mockup { background: #1f2937; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); width: 90%; max-width: 600px; padding: 1.5%; border-radius: 20px; }
+        .device-screen { background: #000; overflow: hidden; display: flex; aspect-ratio: 16 / 10; border-radius: 12px; }
+        .device-screen img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease; }
 
-        /* -- Enhanced Glassmorphism Card -- */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+        /* Testimonials Section */
+        .testimonial-card {
+            background-color: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 1rem; padding: 2.5rem;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            transform: translateY(30px); opacity: 0;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
-            border-color: rgba(96, 165, 250, 0.5); /* blue-400 at 50% opacity */
+        .testimonial-card.in-view { transform: translateY(0); opacity: 1; }
+        .testimonial-card.featured {
+            transform: translateY(30px) scale(1);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
         }
+        .testimonial-card.featured.in-view { transform: translateY(0) scale(1.05); }
+        
+        /* Form, CTA, Footer */
+        .form-input { background-color: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-primary); transition: all 0.3s ease; }
+        .form-input:focus { box-shadow: 0 0 0 2px var(--accent-primary); border-color: var(--accent-primary); outline: none; }
+        html.dark .form-input { color-scheme: dark; }
 
-        /* -- Enhanced CTA Button -- */
-        .cta-button {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-            background-image: linear-gradient(to right, #3b82f6, #60a5fa);
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
-            filter: brightness(1.1);
-        }
-        .cta-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: translateY(0);
-        }
+        .cta-button { background-color: var(--accent-primary); color: white; font-weight: 600; font-size: 1.125rem; border-radius: 9999px; padding: 1rem 3rem; transition: all 0.3s ease; box-shadow: 0 5px 20px -5px var(--accent-primary); }
+        html.dark .cta-button { color: #111; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px -5px var(--accent-primary); }
+        .cta-button:disabled { opacity: 0.6; cursor: not-allowed; transform: translateY(0); box-shadow: 0 5px 20px -5px var(--accent-primary); }
 
-        /* Feature icon sizing */
-        .feature-icon {
-            width: 64px;
-            height: 64px;
+        /* Toast Notification */
+        #toast-notification {
+            position: fixed; bottom: 1.5rem; right: 1.5rem;
+            background-color: var(--card-bg); padding: 1.25rem; border-radius: 0.75rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            max-width: 350px; z-index: 50;
+            opacity: 0; transform: translateY(100px);
+            transition: transform 0.5s cubic-bezier(0.21, 1.02, 0.73, 1), opacity 0.5s;
+            pointer-events: none;
         }
-        /* Fade-in animation for elements */
-        .fade-in {
-            animation: fadeIn 1s ease-in-out forwards;
-            opacity: 0;
-            animation-play-state: paused;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        #toast-notification.is-visible { opacity: 1; transform: translateY(0); }
+        #toast-notification p:first-child { color: var(--text-primary); }
+        #toast-notification p:last-child { color: var(--text-secondary); }
+
+        /* Founder's Modal */
+        #founder-modal { transition: opacity 0.3s ease-in-out; }
+        #founder-modal-content { transition: transform 0.3s ease-in-out; }
+        #founder-modal.is-visible { opacity: 1; pointer-events: auto; }
+        #founder-modal:not(.is-visible) { opacity: 0; pointer-events: none; }
+        #founder-modal-content { transform: scale(0.95); }
+        #founder-modal.is-visible #founder-modal-content { transform: scale(1); }
+
+        footer { background-color: var(--footer-bg); border-top: 1px solid var(--card-border); transition: all 0.5s ease; }
     </style>
+    <script>
+        (function() {
+            try { if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); } } catch (e) {}
+        })();
+    </script>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body class="antialiased">
+    
+    <div id="background-container">
+        <div class="light-theme-art">
+            <div id="mountain-landscape">
+                <div id="mountains-back" class="mountain-layer"></div>
+                <div id="mountains-mid" class="mountain-layer"></div>
+                <div id="mountains-front" class="mountain-layer"></div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm">
+    <header class="sticky top-0 z-20">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-white">
-                UPSC <span class="text-blue-400">Daily</span>
-            </h1>
-            <!-- ============================================= -->
-            <!-- == NEW LOGIN BUTTON ADDED HERE == -->
-            <!-- ============================================= -->
-            <a href="https://upsc-daily-pro.vercel.app/sign-in" 
-               class="px-5 py-2 text-sm font-semibold text-white bg-blue-500/20 border border-blue-400 rounded-lg hover:bg-blue-500/40 transition-colors">
-                Member Login
-            </a>
-            <!-- ============================================= -->
+            <h1 class="text-2xl font-semibold">UPSC <span class="font-bold" style="color: var(--accent-primary);">Daily</span></h1>
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <a href="#" class="text-sm font-medium transition-colors hover:text-opacity-80" style="color: var(--text-primary);">Daily Briefings</a>
+                <a href="#" class="px-5 py-2 text-sm font-medium border rounded-full hover:opacity-80 transition-opacity" style="color: var(--text-primary); border-color: var(--card-border);">Member Login</a>
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none" style="background-color: var(--card-bg); color: var(--text-secondary); border: 1px solid var(--card-border);">
+                    <svg id="theme-icon-sun" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11h-1a1 1 0 110-2h1a1 1 0 110 2zm-11 4.95l-.707.707A1 1 0 013.05 14.95l.707-.707a1 1 0 011.414 1.414zM3 11H2a1 1 0 110-2h1a1 1 0 110 2zm6.95-8.95a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414z"/></svg>
+                    <svg id="theme-icon-moon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="pt-24">
-        <section id="hero" class="animated-hero-bg text-white text-center py-20 md:py-32 overflow-hidden">
-            <div class="container mx-auto px-6 relative z-10">
-                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight fade-in" style="animation-delay: 0.4s;">Your Daily Edge in Current Affairs</h2>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300 mb-8 fade-in" style="animation-delay: 0.6s;">
-                    The essential daily briefing and analysis platform designed to help you conquer the UPSC Current Affairs section.
-                </p>
-
-                <p class="text-4xl md:text-5xl font-bold text-white mb-3 tracking-wide fade-in" style="animation-delay: 0.8s;">
-                    Just ₹300<span class="text-2xl text-gray-400">/year</span>
-                </p>
-                <p class="text-lg md:text-xl text-gray-400 mb-10 fade-in" style="animation-delay: 0.9s;">
-                    An investment in your future, made incredibly affordable.
-                </p>
-
-                <button id="buy-button"
-                        class="text-white font-bold py-4 px-8 rounded-lg text-lg cta-button inline-block fade-in" style="animation-delay: 1s;">
-                    Get Your Daily Edge
-                </button>
-                
-                <!-- 7-Day Money-Back Guarantee -->
-                <div class="mt-6 flex items-center justify-center gap-2 text-green-300 fade-in" style="animation-delay: 1.1s;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span class="font-semibold">7-Day Money-Back Guarantee</span>
-                </div>
-            </div>
+    <main>
+        <section class="relative text-center h-[90vh] flex flex-col items-center justify-center section-padding">
+            <h2 class="text-4xl md:text-6xl font-bold mb-5 leading-tight">
+                Everything You Need. <br> Nothing You Don’t.
+            </h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">Your one-stop dashboard for current affairs mastery.</p>
+            <button id="cta-button-hero" class="cta-button !text-lg !px-8 !py-3 mt-8">Start Your Focused Prep</button>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h3 class="text-3xl md:text-4xl font-bold text-white">Why UPSC Daily?</h3>
-                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Everything you need to master current affairs, from curated news to in-depth analysis and trend tracking.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Feature 1 -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in" style="animation-delay: 0.2s;">
-                        <div class="flex justify-center mb-4">
-                            <svg class="feature-icon text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3h2m-4 3h2m-4 3h2" />
-                            </svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Daily Briefings</h4>
-                        <p class="text-gray-400 text-base">Receive concise, exam-relevant summaries of the day's most important news. Never miss a critical update.</p>
+        <section class="section-padding">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">We Built the Tool We Wished We Had</h2>
+                <p class="mt-4 text-lg max-w-3xl mx-auto">Tired of the clutter and chaos? We were too. Here's how we fixed it.</p>
+                <div class="mt-16 space-y-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 text-left items-start">
+                        <div><p class="pain-solution-label">THE PAIN:</p><h3 class="text-2xl mt-2 pain-heading">"I'm drowning in news and editorials."</h3><p class="mt-3">Dozens of sources, endless scrolling, and no clear idea of what's actually important for the exam.</p></div>
+                        <div><p class="pain-solution-label">OUR SOLUTION:</p><h3 class="text-2xl mt-2 solution-heading">Daily Briefings & Thematic Analysis.</h3><p class="mt-3">We cut the noise. Get concise, syllabus-linked summaries and analysis that show you the bigger picture.</p></div>
                     </div>
-                    <!-- Feature 2 -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in" style="animation-delay: 0.4s;">
-                        <div class="flex justify-center mb-4">
-                           <svg class="feature-icon text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
-                           </svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">In-Depth Analysis</h4>
-                        <p class="text-gray-400 text-base">Go beyond the headlines with expert analysis connecting current events to the core UPSC syllabus.</p>
-                    </div>
-                    <!-- Feature 3 -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in" style="animation-delay: 0.6s;">
-                        <div class="flex justify-center mb-4">
-                            <svg class="feature-icon text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                            </svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Trend Tracking</h4>
-                        <p class="text-gray-400 text-base">Identify recurring themes and high-importance topics with our analytical tools, helping you focus your preparation.</p>
+                    <hr class="gold-divider">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 text-left items-start">
+                        <div><p class="pain-solution-label">THE PAIN:</p><h3 class="text-2xl mt-2 pain-heading">"My notes are a mess and revision is impossible."</h3><p class="mt-3">Scattered notes across notebooks and apps make last-minute revision a nightmare.</p></div>
+                        <div><p class="pain-solution-label">OUR SOLUTION:</p><h3 class="text-2xl mt-2 solution-heading">Integrated Factsheets & Compilations.</h3><p class="mt-3">Everything in one place. Searchable, categorized, and ready for rapid revision before Prelims and Mains.</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="py-20 bg-gray-800/50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h3 class="text-3xl md:text-4xl font-bold text-white">Trusted by Aspirants Like You</h3>
-                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">See what our users are saying about their journey with UPSC Daily.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
-                    <div class="glass-card p-8 rounded-2xl fade-in" style="animation-delay: 0.3s;">
-                        <p class="text-gray-300 mb-4">"UPSC Daily completely changed how I approach my current affairs prep. The daily briefings are a game-changer."</p>
-                        <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full mr-4" src="https://placehold.co/100x100/3B82F6/FFFFFF?text=R" alt="Rohan S.">
-                            <div>
-                                <p class="font-bold text-white">Rohan S.</p>
-                                <p class="text-sm text-gray-400">Future IAS Officer</p>
-                            </div>
-                        </div>
+        <section id="solutions-sticky-container">
+            <div id="solutions-sticky-content" class="container mx-auto px-6 gap-8">
+                <div class="w-full md:w-1/2 flex justify-center p-4 md:p-8"><div class="device-mockup"><div class="device-screen"><img id="device-image" src="https://placehold.co/800x500/000000/FFFFFF?text=Dashboard" alt="App Preview"></div></div></div>
+                <div class="w-full md:w-1/2 flex items-center"><div id="solutions-text" class="relative w-full h-64">
+                    <div class="solution-text-item absolute inset-0 space-y-3" data-img="https://placehold.co/800x500/111827/FFFFFF?text=Dashboard"><h3 class="text-3xl md:text-4xl font-semibold">Welcome to your Dashboard.</h3><p class="text-lg md:text-xl">A clean, focused space with all your tools, available on all your devices.</p></div>
+                    <div class="solution-text-item absolute inset-0 space-y-3" data-img="https://placehold.co/800x500/064e3b/FFFFFF?text=Compilation"><h3 class="text-3xl md:text-4xl font-semibold">Current Affairs Compilation</h3><p class="text-lg md:text-xl">Filter, sort, and analyze our entire database of articles to find exactly what you need.</p></div>
+                    <div class="solution-text-item absolute inset-0 space-y-3" data-img="https://placehold.co/800x500/1e3a8a/FFFFFF?text=Syllabus"><h3 class="text-3xl md:text-4xl font-semibold">Micro-Syllabus</h3><p class="text-lg md:text-xl">Go beyond the surface with a detailed, topic-wise breakdown of the entire UPSC syllabus.</p></div>
+                    <div class="solution-text-item absolute inset-0 space-y-3" data-img="https://placehold.co/800x500/7f1d1d/FFFFFF?text=PYQ+Analysis"><h3 class="text-3xl md:text-4xl font-semibold">PYQ Analysis</h3><p class="text-lg md:text-xl">Deep dive into the patterns and trends of past papers, right on your laptop.</p></div>
+                </div></div>
+            </div>
+        </section>
+
+        <section id="community" class="section-padding">
+             <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">From the Community</h2>
+                <p class="mt-4 text-lg">Here's what fellow aspirants are saying.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div class="testimonial-card flex flex-col text-left">
+                        <p class="mb-6 text-lg italic">"The daily briefings are a game-changer. Finally, my newspaper reading has a focus. It saves me at least an hour every day."</p>
+                        <div class="flex items-center mt-auto pt-4 border-t" style="border-color: var(--card-border);"><img class="w-11 h-11 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/d9480f/ffffff?text=P" alt="Priya K."><div><p class="font-bold" style="color: var(--text-primary);">Priya K.</p><p class="text-sm">Aspirant, 2nd Attempt</p></div></div>
                     </div>
-                    <!-- Testimonial 2 -->
-                    <div class="glass-card p-8 rounded-2xl fade-in" style="animation-delay: 0.5s;">
-                        <p class="text-gray-300 mb-4">"I was drowning in news articles before this. UPSC Daily helped me focus on what's truly important. Absolutely essential."</p>
-                        <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full mr-4" src="https://placehold.co/100x100/60A5FA/FFFFFF?text=P" alt="Priya K.">
-                            <div>
-                                <p class="font-bold text-white">Priya K.</p>
-                                <p class="text-sm text-gray-400">Delhi University</p>
-                            </div>
-                        </div>
+                    <div class="testimonial-card featured flex flex-col text-left relative">
+                        <p class="mb-6 text-lg italic">"As a working professional, time is everything. UPSC Daily gives me the most important news without the fluff. Absolutely essential."</p>
+                         <div class="flex items-center mt-auto pt-4 border-t" style="border-color: var(--card-border);"><img class="w-11 h-11 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/d9480f/ffffff?text=R" alt="Rohan S."><div><p class="font-bold" style="color: var(--text-primary);">Rohan S.</p><p class="text-sm">Working Professional</p></div></div>
                     </div>
-                    <!-- Testimonial 3 -->
-                    <div class="glass-card p-8 rounded-2xl fade-in md:col-span-2 lg:col-span-1" style="animation-delay: 0.7s;">
-                         <p class="text-gray-300 mb-4">"The analysis is brilliant. I can actually see how events connect to the syllabus. Highly recommended."</p>
-                        <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full mr-4" src="https://placehold.co/100x100/93C5FD/FFFFFF?text=A" alt="Ankit M.">
-                            <div>
-                                <p class="font-bold text-white">Ankit M.</p>
-                                <p class="text-sm text-gray-400">2nd Attempt</p>
-                            </div>
-                        </div>
+                    <div class="testimonial-card flex flex-col text-left">
+                        <p class="mb-6 text-lg italic">"The factsheets alone are worth the price. Having all important reports and indices in one place is brilliant for Mains revision."</p>
+                        <div class="flex items-center mt-auto pt-4 border-t" style="border-color: var(--card-border);"><img class="w-11 h-11 rounded-full mr-4 object-cover" src="https://placehold.co/100x100/d9480f/ffffff?text=A" alt="Ankit M."><div><p class="font-bold" style="color: var(--text-primary);">Ankit M.</p><p class="text-sm">Aspirant, 1st Attempt</p></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Final Call to Action Section -->
-        <section id="final-cta" class="py-20 bg-gray-900 text-center">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in" style="animation-delay: 0.2s;">Ready to Master Current Affairs?</h3>
-                <p class="text-gray-400 max-w-2xl mx-auto mb-8 fade-in" style="animation-delay: 0.4s;">
-                    Join thousands of aspirants who are streamlining their journey with UPSC Daily. Secure your access today.
-                </p>
-                <button id="buy-button-bottom"
-                        class="text-white font-bold py-4 px-12 rounded-lg text-lg cta-button inline-block fade-in" style="animation-delay: 0.6s;">
-                    Enroll Now for ₹300/year
-                </button>
+        <section id="final-cta" class="section-padding text-center" style="background-color: var(--card-bg); border-top: 1px solid var(--card-border);">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold mb-4">Ready to Change Your Preparation?</h2>
+                <p class="text-xl max-w-2xl mx-auto mb-8">Stop the endless scrolling and start focused learning. Get a full year of access for less than the price of one book.</p>
+                <button id="buy-button-bottom" class="cta-button !text-lg !px-8 !py-3">Enroll for ₹300/year</button>
+                <p class="mt-4 text-sm max-w-md mx-auto">No upsells. No hidden charges. Just a small contribution to keep our platform independent and running smoothly.</p>
             </div>
         </section>
     </main>
-
-    <!-- Contact and Policies Section -->
-    <section id="contact" class="bg-gray-800/50 py-16">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <h3 class="text-2xl font-bold text-white mb-8">Contact & Policies</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Contact Info -->
-                <div>
-                    <h4 class="font-bold text-white text-lg mb-2">Contact Us</h4>
-                    <p>upscdaily@gmail.com</p>
-                    <p>+91-9015285523</p>
-                </div>
-                <!-- Address -->
-                <div>
-                    <h4 class="font-bold text-white text-lg mb-2">Address</h4>
-                    <p>Saket, New Delhi, India</p>
-                    <p>110030</p>
-                </div>
-                <!-- Policies -->
-                <div>
-                    <h4 class="font-bold text-white text-lg mb-2">Legal</h4>
-                    <a href="#" class="hover:text-white">Terms of Service</a><br>
-                    <a href="#" class="hover:text-white">Privacy Policy</a><br>
-                    <a href="#" class="hover:text-white">Refund Policy</a>
+    
+    <footer class="text-sm">
+        <div class="container mx-auto section-padding !py-16 grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="md:col-span-2">
+                <h4 class="font-semibold" style="color: var(--text-primary);">Contact & Policies</h4>
+                <div class="mt-4 space-y-2 text-sm" style="color: var(--text-secondary);">
+                    <p><strong>Contact:</strong> support@upscdaily.dev</p>
+                    <p><strong>Address:</strong> The Mall, Shimla, Himachal Pradesh, 171001</p>
+                    <p><strong>Legal:</strong> Terms & Conditions, Privacy Policy, Refund Policy</p>
                 </div>
             </div>
+            <div class="md:col-span-3">
+                 <h4 class="font-semibold" style="color: var(--text-primary);">Have a Suggestion?</h4>
+                 <p class="text-sm mt-2 mb-4">We're building this for you. Let us know what you think.</p>
+                 <form class="space-y-3">
+                    <textarea rows="2" class="form-input block w-full rounded-md shadow-sm text-sm" placeholder="I wish there was a feature for..."></textarea>
+                    <button type="submit" class="cta-button !text-sm !px-6 !py-2 w-full">Submit</button>
+                 </form>
+            </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2025 UPSC Daily. All Rights Reserved.</p>
-            <p class="mt-2 text-sm">Designed to empower every UPSC aspirant on their path to success.</p>
-        </div>
+        <div class="py-6 text-center border-t text-xs" style="border-color: var(--card-border); color: var(--text-secondary);"><p>© 2025 UPSC Daily. All Rights Reserved.</p><p class="mt-1">Built with ❤️ in Shimla, for aspirants everywhere.</p></div>
     </footer>
 
-    <!-- This script tag loads the Razorpay checkout library -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- Payment Status Toast Notification -->
+    <div id="toast-notification">
+        <p class="font-bold mb-1" id="toast-title"></p>
+        <p class="text-sm" id="toast-message"></p>
+    </div>
 
-    <!-- Main Payment Logic -->
+    <!-- Founder's Message Modal -->
+    <div id="founder-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4">
+        <div id="founder-modal-content" class="relative w-full max-w-md rounded-2xl border p-8 shadow-2xl backdrop-blur-xl" style="background-color: var(--card-bg); border-color: var(--card-border);">
+            <button id="close-modal-btn" class="absolute top-3 right-3 p-1 text-gray-500 hover:text-gray-200 transition-colors">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="mb-3 text-xl font-bold" style="color: var(--text-primary);">Message from the Founder</h3>
+            <p class="text-base" style="color: var(--text-secondary);">
+                We're not a big business. We're past aspirants who built the tool we wished we had. Your subscription keeps us independent and ad-free. Thanks for being part of the journey.
+            </p>
+        </div>
+    </div>
+    
     <script>
-        // This function handles the payment process
+    document.addEventListener("DOMContentLoaded", function() {
+        // --- Existing UI and Animation Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        function applyTheme(theme) {
+            document.documentElement.classList.toggle('dark', theme === 'dark');
+            document.getElementById('theme-icon-sun').classList.toggle('hidden', theme === 'dark');
+            document.getElementById('theme-icon-moon').classList.toggle('hidden', theme !== 'dark');
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transitionDelay = `${index * 100}ms`;
+                    entry.target.classList.add('in-view');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        testimonialCards.forEach(card => cardObserver.observe(card));
+
+        const solutionsContainer = document.getElementById('solutions-sticky-container');
+        const solutionsTextItems = document.querySelectorAll('.solution-text-item');
+        const deviceImage = document.getElementById('device-image');
+        let lastActiveIndex = -1;
+        function handleSolutionScroll() {
+            if (!solutionsContainer || !solutionsTextItems.length) return;
+            const rect = solutionsContainer.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.bottom < 0) return;
+            const scrollPercent = -rect.top / (solutionsContainer.scrollHeight - window.innerHeight);
+            const numItems = solutionsTextItems.length;
+            const currentIndexFloat = scrollPercent * numItems;
+            const activeIndex = Math.min(Math.floor(currentIndexFloat), numItems - 1);
+            const progress = currentIndexFloat - activeIndex;
+
+            if (activeIndex !== lastActiveIndex) {
+                const newImgSrc = solutionsTextItems[activeIndex].getAttribute('data-img');
+                if (deviceImage.src !== newImgSrc) {
+                    deviceImage.style.opacity = 0;
+                    setTimeout(() => { deviceImage.src = newImgSrc; deviceImage.style.opacity = 1; }, 300);
+                }
+                lastActiveIndex = activeIndex;
+            }
+            solutionsTextItems.forEach((item, index) => {
+                let opacity = 0; let translateY = 50;
+                if (index === activeIndex) { opacity = 1 - progress; translateY = -progress * 50; } 
+                else if (index === activeIndex + 1) { opacity = progress; translateY = (1 - progress) * 50; }
+                item.style.opacity = Math.pow(opacity, 2);
+                item.style.transform = `translateY(${translateY}px)`;
+            });
+        }
+        
+        const mountainBack = document.getElementById('mountains-back');
+        const mountainMid = document.getElementById('mountains-mid');
+        const mountainFront = document.getElementById('mountains-front');
+        function handleScroll() {
+            handleSolutionScroll();
+            if (document.documentElement.classList.contains('dark')) return;
+            const scrollY = window.scrollY;
+            if (mountainBack) mountainBack.style.transform = `translateY(${scrollY * 0.1}px)`;
+            if (mountainMid) mountainMid.style.transform = `translateY(${scrollY * 0.25}px)`;
+            if (mountainFront) mountainFront.style.transform = `translateY(${scrollY * 0.4}px)`;
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        function createParticles() {
+            if (document.documentElement.classList.contains('dark')) return;
+            const bgContainer = document.querySelector('.light-theme-art');
+            if (!bgContainer) return;
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'light-particle';
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${(Math.random() * 15) + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                bgContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+        handleScroll();
+
+        // --- Toast Notification Logic ---
+        const toastNotification = document.getElementById('toast-notification');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+        let toastTimeout;
+
+        function showToast(title, message, duration = 5000) {
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            toastNotification.classList.add('is-visible');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastNotification.classList.remove('is-visible');
+            }, duration);
+        }
+
+        // --- Founder's Modal Logic ---
+        const founderModal = document.getElementById('founder-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function showFounderModal() {
+            if (sessionStorage.getItem('founderModalShown')) {
+                founderModal.classList.add('hidden'); // Ensure it's hidden if already shown
+                return;
+            }
+            founderModal.classList.remove('hidden');
+            founderModal.classList.add('is-visible');
+        }
+
+        function hideFounderModal() {
+            founderModal.classList.remove('is-visible');
+            sessionStorage.setItem('founderModalShown', 'true');
+        }
+
+        // Show the modal after a 3-second delay
+        setTimeout(showFounderModal, 3000);
+
+        // Event listeners to close the modal
+        closeModalBtn.addEventListener('click', hideFounderModal);
+        founderModal.addEventListener('click', function(event) {
+            if (event.target === founderModal) { // Only close if clicking the background overlay
+                hideFounderModal();
+            }
+        });
+        
+        // --- RAZORPAY PAYMENT LOGIC ---
         async function initiatePayment(button) {
-            // Disable button to prevent multiple clicks
             button.disabled = true;
             const originalText = button.textContent;
             button.textContent = 'Processing...';
 
             try {
-                // 1. Call our secure Netlify Function to create a Razorpay order
+                // NOTE: This assumes you have a serverless function at this endpoint
+                // to securely create a Razorpay order.
                 const orderResponse = await fetch('/.netlify/functions/create-razorpay-order', {
                     method: 'POST'
                 });
                 
                 if (!orderResponse.ok) {
-                    throw new Error('Failed to create payment order.');
+                    const errorBody = await orderResponse.text();
+                    throw new Error(`Order creation failed: ${orderResponse.status} ${errorBody}`);
                 }
                 
                 const orderData = await orderResponse.json();
 
-                // 2. Configure Razorpay Checkout with the order details
                 const options = {
-                    // =================================================================
-                    // IMPORTANT: Replace this with your PUBLIC Razorpay Key ID
-                    "key": "rzp_test_2M6t5H8p09NP8U", 
-                    // =================================================================
-                    "amount": orderData.amount, // Amount from the server
+                    "key": "rzp_test_2M6t5H8p09NP8U", // Replace with your public Razorpay Key ID
+                    "amount": orderData.amount,
                     "currency": "INR",
                     "name": "UPSC Daily",
                     "description": "Yearly Access Subscription",
-                    "order_id": orderData.id, // The ID from our Netlify function
+                    "order_id": orderData.id,
                     "handler": function (response){
-                        // This function runs after a successful payment.
-                        alert('Payment Successful! You will receive access details shortly.');
-                        // For example, create a success.html page and uncomment the line below:
-                        // window.location.href = '/success.html';
+                        showToast('Payment Successful!', 'You will receive access details shortly.');
                     },
-                    "prefill": {
-                        "name": "",
-                        "email": "", // Razorpay will collect these
-                        "contact": ""
-                    },
-                    "theme": {
-                        "color": "#3b82f6"
-                    },
+                    "prefill": { "name": "", "email": "", "contact": "" },
+                    "theme": { "color": getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim() },
                     "modal": {
                         "ondismiss": function(){
-                             // Re-enable the button if the user closes the pop-up
                             button.disabled = false;
                             button.textContent = originalText;
                         }
@@ -330,27 +464,24 @@
 
                 const rzp = new Razorpay(options);
 
-                // Handle payment failures
                 rzp.on('payment.failed', function (response){
-                    alert(response.error.description);
-                    // Re-enable the button if payment fails
+                    showToast('Payment Failed', response.error.description);
                     button.disabled = false;
                     button.textContent = originalText;
                 });
 
-                // 3. Open the Razorpay payment pop-up
                 rzp.open();
 
             } catch (error) {
-                console.error(error);
-                alert('Could not initiate payment. Please try again later.');
+                console.error("Payment Initiation Error:", error);
+                showToast('Error', 'Could not connect to payment gateway. Please try again later.');
                 button.disabled = false;
                 button.textContent = originalText;
             }
         }
 
         // Add event listeners to both buy buttons
-        document.getElementById('buy-button').addEventListener('click', function(e) {
+        document.getElementById('cta-button-hero').addEventListener('click', function(e) {
             e.preventDefault();
             initiatePayment(this);
         });
@@ -359,31 +490,8 @@
             e.preventDefault();
             initiatePayment(this);
         });
-    </script>
-
-    <!-- Animation Logic -->
-    <script>
-        // Intersection Observer for fade-in animations
-        document.addEventListener("DOMContentLoaded", function() {
-            const faders = document.querySelectorAll('.fade-in');
-            const appearOptions = {
-                threshold: 0.1, // Trigger when 10% of the element is in view
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running'; // Start animation
-                        appearOnScroll.unobserve(entry.target); // Stop observing once animated
-                    }
-                });
-            }, appearOptions);
-
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
-            });
-        });
+    });
     </script>
 </body>
 </html>
+
